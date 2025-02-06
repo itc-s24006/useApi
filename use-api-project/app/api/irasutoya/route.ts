@@ -1,25 +1,39 @@
 import { NextResponse } from "next/server";
 
 const JSON_URL =
-  "https://github.com/rhysd/Irasutoyer/blob/master/irasutoya.json";
+  "https://raw.githubusercontent.com/rhysd/Irasutoyer/master/irasutoya.json"; //ここはページのURLではなく生データというやつらしい(raw)
 
 export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url);
+  const { searchParams } = new URL(req.url); //リクエストの URL を解析
   const query = searchParams.get("q")?.toLowerCase() || "";
+  /*
+    searchParams.get("q")検索ワードをURLに組み込む
+    入力が無い場合は空文字をセット
+  */
 
   try {
     const res = await fetch(JSON_URL);
-    const data = await res.json();
 
-    // 検索ワードがある場合、フィルタリング
+    if (!res.ok) {
+      throw new Error(`Failed to fetch data: ${res.status} ${res.statusText}`);
+    }
+
+    const fetchedData = await res.json();
+    //console.log("Fetched Data:", fetchedData); //デバッグ用
+
+    const data = fetchedData.results || [];
+    //setResults(data.results); ここでは使わずpage.tsxで使うらしい
+
+    //irasutoya.jsonから、検索ワードと一致するものだけを抽出
     const filteredResults = query
-      ? data.filter((item: { title: string }) =>
-          item.title.toLowerCase().includes(query)
+      ? data.filter((item: { name: string }) =>
+          item.name.toLowerCase().includes(query.toLowerCase())
         )
       : data;
 
-    return NextResponse.json({ results: filteredResults });
+    return NextResponse.json({ results: filteredResults }); //検索結果をjsonで返してる
   } catch (error) {
+    console.error("API Error:", error);
     return NextResponse.json(
       { error: "データの取得に失敗しました" },
       { status: 500 }
