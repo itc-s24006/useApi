@@ -21,7 +21,7 @@ export async function GET(req: Request) {
     const fetchedData = await res.json();
     //console.log("Fetched Data:", fetchedData); //デバッグ用
 
-    const data = fetchedData.results || [];
+    const data = fetchedData || [];
     //setResults(data.results); ここでは使わずpage.tsxで使うらしい
 
     //irasutoya.jsonから、検索ワードと一致するものだけを抽出
