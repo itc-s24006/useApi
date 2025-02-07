@@ -1,9 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
-// 画像データの型を定義
 type ImageResult = {
   image_url: string;
   name: string;
@@ -16,26 +15,40 @@ export default function Home() {
   const [error, setError] = useState("");
   const [apiData, setApiData] = useState<ImageResult[]>([]);
 
-  useEffect(() => {
-    if (apiData.length > 0) {
-      setResults(apiData);
-    }
-  }, [apiData]);
+  // 英語の入力があった場合に翻訳を行う関数
+  const translateText = async (text: string) => {
+    if (!text) return text;
 
+    const res = await fetch(`/api/deepL?q=${encodeURIComponent(text)}`);
+    const data = await res.json();
+
+    console.log("翻訳APIのレスポンス：", data); //デバッグ用
+
+    return data.translatedText || text; // 翻訳結果を返す
+  };
+
+  // 入力が英語か日本語かを判断する関数
+  const isEnglish = (text: string) => {
+    return /^[a-zA-Z0-9]+$/.test(text); // 英語文字だけを含んでいる場合はtrue
+  };
+
+  // 画像検索
   const searchImages = async () => {
     if (!query.trim()) return;
+
     setLoading(true);
     setError("");
 
     try {
-      console.log("検索クエリ:", query);
+      // 日本語の場合は翻訳せず、英語の場合は翻訳する
+      const searchQuery = isEnglish(query) ? await translateText(query) : query;
 
-      const res = await fetch(`/api/irasutoya?q=${encodeURIComponent(query)}`);
+      // 翻訳後またはそのままの検索クエリで画像検索を実行
+      const res = await fetch(
+        `/api/irasutoya?q=${encodeURIComponent(searchQuery)}`
+      );
       if (!res.ok) throw new Error("検索に失敗しました");
       const data = await res.json();
-
-      // console.log("全データ：", data);
-      // console.log("検索結果：", data.results);
 
       setApiData(data.results || []);
     } catch (err) {
@@ -44,6 +57,13 @@ export default function Home() {
       setLoading(false);
     }
   };
+
+  // 画像が更新されるタイミングで結果を設定
+  useEffect(() => {
+    if (apiData.length > 0) {
+      setResults(apiData);
+    }
+  }, [apiData]);
 
   return (
     <div className="p-4">
