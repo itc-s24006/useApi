@@ -31,7 +31,10 @@ export async function GET(req: Request) {
         )
       : data;
 
-    return NextResponse.json({ results: filteredResults }); //検索結果をjsonで返してる
+    //最初の一件だけ取得
+    const singleResult = filteredResults.length > 0 ? [filteredResults[0]] : [];
+
+    return NextResponse.json({ results: singleResult }); //検索結果をjsonで返してる
   } catch (error) {
     console.error("API Error:", error);
     return NextResponse.json(
