@@ -83,9 +83,9 @@ export default function Home() {
 
   return (
     <div>
-      <div className="p-4">
+      <div>
         <h1 className="text-2xl font-bold mb-4">イメージで覚える英単語</h1>
-        <div className="flex gap-2">
+        <div>
           <input
             type="text"
             value={query}
@@ -93,21 +93,17 @@ export default function Home() {
             className="border p-2 flex-1 inputBox"
             placeholder="単語を入力"
           />
-          <button
-            onClick={searchImages}
-            className="text-white p-2 rounded button"
-            disabled={loading}
-          >
+          <button onClick={searchImages} className="p-2" disabled={loading}>
             {loading ? "検索中..." : "検索"}
           </button>
         </div>
 
         {error && <p className="text-red-500 mt-2">{error}</p>}
 
-        <div className="mt-4">
+        <div className="grid gap-3">
           {/* 翻訳結果の表示 */}
           {originalQuery && translatedQuery && (
-            <div className="text-lg font-semibold text-center">
+            <div className="p-2 g-col-6">
               {isEnglish(query) ? (
                 <>
                   <p>{originalQuery}</p> {/* 英語（元の入力 or 翻訳前） */}
@@ -122,7 +118,7 @@ export default function Home() {
             </div>
           )}
 
-          <div className="mt-2 grid grid-cols-3 gap-4">
+          <div className="p-2 g-col-6">
             {results.length > 0
               ? results.map((item, index) => (
                   <Image

@@ -86,7 +86,7 @@ body {
 }
 
 body {
-  background-color: #862040;
+  background-color: #980000ff;
   margin: 20px;
   padding: 10px;
 }
@@ -110,28 +110,32 @@ a {
 
 h1 {
   font-size: 40px;
+  color: white;
 }
 
 p {
   font-size: 25px;
+  padding-left: 20px;
+  color: white;
 }
 
 .inputBox {
   margin: 20px;
   padding: 10px;
   width: 250px;
-  height: 35px;
-  background-color: #dbdbdb;
+  height: 40px;
+  background-color: #ffec99ff;
   font-size: 20px;
+  color: black;
 }
 
 .button {
-  width: 50px;
-  height: 35px;
-  background-color: #dbdbdb;
+  width: 100px;
+  height: 40px;
+  background-color: #ffec99ff;
   color: black;
-  border-radius: 7px;
-  font-size: 17px;
+  border-radius: none;
+  font-size: 18px;
 }
 
 @media (prefers-color-scheme: dark) {

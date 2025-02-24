@@ -1,5 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Kaisei_Tokumin } from "next/font/google";
 import "./globals.css";
 
@@ -18,7 +19,8 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={kaiseiTokumin.className}>
-        <div className="container-fluid container">{children}</div>
+        {children}
+        {/* <div className="container-fluid container">{children}</div> */}
       </body>
     </html>
   );
