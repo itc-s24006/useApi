@@ -74,7 +74,7 @@
 }
 
 * {
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   padding: 0;
   margin: 0;
 }
@@ -91,17 +91,15 @@ body {
   padding: 10px;
 }
 
-.container {
+/* .container {
   height: 100%;
-  border: 5px solid #dbdbdb; /* 枠線 */
-  /* box-sizing: border-box; */
-}
+} */
 
-@media screen and (max-width: 767px) {
+/* @media screen and (max-width: 767px) {
   .container {
-    border: 5px solid #dbdbdb; /* SP枠線の幅 */
+    border: 5px solid #dbdbdb; /* SP枠線の幅
   }
-}
+} */
 
 a {
   color: inherit;
@@ -109,7 +107,7 @@ a {
 }
 
 h1 {
-  font-size: 40px;
+  font-size: 50px;
   color: white;
 }
 
@@ -122,9 +120,10 @@ p {
 .inputBox {
   margin: 20px;
   padding: 10px;
-  width: 250px;
+  width: 300px;
   height: 40px;
   background-color: #ffec99ff;
+  border-radius: none;
   font-size: 20px;
   color: black;
 }
@@ -135,6 +134,7 @@ p {
   background-color: #ffec99ff;
   color: black;
   border-radius: none;
+  top: 100px;
   font-size: 18px;
 }
 
@@ -142,4 +142,24 @@ p {
   html {
     color-scheme: dark;
   }
+}
+
+.text_block {
+  width: 500px;
+}
+.text_style {
+  font-size: 40px;
+  text-align: center;
+  margin-top: 40px;
+  transform: translateY(100px);
+}
+
+.image_style {
+  margin-left: 80px;
+  right: 0;
+  left: auto;
+  width: 600px;
+}
+.image {
+  border: 7px solid #c9a333;
 }

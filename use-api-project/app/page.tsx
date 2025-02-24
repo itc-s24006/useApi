@@ -82,58 +82,66 @@ export default function Home() {
   };
 
   return (
-    <div>
-      <div>
-        <h1 className="text-2xl font-bold mb-4">イメージで覚える英単語</h1>
-        <div>
+    <div className="container">
+      <div className="my-4">
+        <h1 className="text-center font-weight-bold mb-4">
+          イメージで覚える英単語
+        </h1>
+        <div className="d-flex mb-3 py-3">
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="border p-2 flex-1 inputBox"
+            className="form-control inputBox"
             placeholder="単語を入力"
           />
-          <button onClick={searchImages} className="p-2" disabled={loading}>
+          <button
+            onClick={searchImages}
+            className="btn ml-2 button mt-3"
+            disabled={loading}
+          >
             {loading ? "検索中..." : "検索"}
           </button>
         </div>
 
-        {error && <p className="text-red-500 mt-2">{error}</p>}
+        {error && <p className="text-danger mt-2">{error}</p>}
 
-        <div className="grid gap-3">
+        <div className="d-flex gap-4 mt-6">
           {/* 翻訳結果の表示 */}
           {originalQuery && translatedQuery && (
-            <div className="p-2 g-col-6">
+            <div className="w-33 text_block">
               {isEnglish(query) ? (
                 <>
-                  <p>{originalQuery}</p> {/* 英語（元の入力 or 翻訳前） */}
-                  <p>{translatedQuery}</p> {/* 日本語（翻訳後） */}
+                  <p className="font-weight-bold text_style">{originalQuery}</p>
+                  <p className="font-weight-bold text_style">
+                    {translatedQuery}
+                  </p>
                 </>
               ) : (
                 <>
-                  <p>{translatedQuery}</p> {/* 英語（翻訳後） */}
-                  <p>{originalQuery}</p> {/* 日本語（元の入力 or 翻訳前） */}
+                  <p className="font-weight-bold text_style">
+                    {translatedQuery}
+                  </p>
+                  <p className="font-weight-bold text_style">{originalQuery}</p>
                 </>
               )}
             </div>
           )}
 
-          <div className="p-2 g-col-6">
+          <div className="w-66 d-flex justify-content-center image_style">
             {results.length > 0
               ? results.map((item, index) => (
                   <Image
                     key={index}
                     src={item.image_url}
                     alt={item.name}
-                    className="w-full h-auto rounded shadow"
-                    width={300}
-                    height={300}
+                    className="rounded-lg shadow-lg object-contain image"
+                    width={600}
+                    height={600}
                   />
                 ))
               : !loading && (
-                  <p className="text-gray-500">
-                    イメージが見つかりませんでした。
-                  </p>
+                  <p className="text-muted">イメージが見つかりませんでした。</p>
                 )}
           </div>
         </div>

@@ -18,10 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body className={kaiseiTokumin.className}>
-        {children}
-        {/* <div className="container-fluid container">{children}</div> */}
-      </body>
+      <body className={kaiseiTokumin.className}>{children}</body>
     </html>
   );
 }
