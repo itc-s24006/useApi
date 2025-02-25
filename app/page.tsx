@@ -25,13 +25,18 @@ export default function Home() {
 
     // 翻訳対象の言語を決定
     const targetLang = isEnglish(text) ? "JA" : "EN"; // 英語なら日本語、逆なら英語に翻訳
+    const apiUrl = `/api/deepL?q=${encodeURIComponent(
+      text
+    )}&target_lang=${targetLang}`;
 
     try {
-      const res = await fetch(
-        `/api/deepL?q=${encodeURIComponent(text)}&target_lang=${targetLang}`
-      );
+      console.log("API を呼び出す前:", apiUrl);
+      const res = await fetch(apiUrl);
+
+      console.log("レスポンスのステータス:", res.status);
 
       const data = await res.json();
+      console.log("DeepL API のレスポンス:", data);
       return data.translatedText || text; // 翻訳結果を返す
     } catch (err) {
       console.error("翻訳エラー:", err);
