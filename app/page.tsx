@@ -25,7 +25,7 @@ export default function Home() {
 
     // 翻訳対象の言語を決定
     const targetLang = isEnglish(text) ? "JA" : "EN"; // 英語なら日本語、逆なら英語に翻訳
-    const apiUrl = `https://use-api-hazel.vercel.app/api/deepL?q=${encodeURIComponent(
+    const apiUrl = `/api/deepL?q=${encodeURIComponent(
       text
     )}&target_lang=${targetLang}`;
 
