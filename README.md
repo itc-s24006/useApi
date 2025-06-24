@@ -1,3 +1,6 @@
+### ⚠本成果物はAIツール（ChatGPT）を参考に作成し、動作しない部分やエラーについては自身で修正・確認を行いました。
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
