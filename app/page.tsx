@@ -30,12 +30,9 @@ export default function Home() {
     )}&target_lang=${targetLang}`;
 
     try {
-      console.log("API を呼び出す前:", apiUrl); //デバッグ
       const res = await fetch(apiUrl);
-      const textResponse = await res.text(); //デバッグ
-      console.log("API レスポンス:", textResponse); //デバッグ
 
-      console.log("レスポンスのステータス:", res.status); //デバッグ
+      console.log("レスポンスのステータス:", res.status); 
 
       if (!res.ok) {
         throw new Error(`HTTP エラー: ${res.status}`);
@@ -162,7 +159,7 @@ export default function Home() {
 }
 
 /*
-変わらず日本語で入力したとき、英語に翻訳されない
+日本語で入力したとき、英語に翻訳されない
 [考えられる原因と対処]
 ・APIキーが無効、または制限に達している可能性 
 -> 英語で入力したときは翻訳できてるからキーは有効。実行のたびにAPIの利用状況を更新して確認しているから制限に達していない。
@@ -175,8 +172,8 @@ export default function Home() {
 -> 同じような問題が報告されているか調べたが見つからなかった。
 
 「犬」以外の日本語で入力したら、翻訳できるものとできないものがあった
-「世界」と入力すると中国語判定だけど、worldと表示。画像は出ない
- ->変わらず中国語判定だけど画像が出るようになった。
-「お茶」と入力するとtea ceremony(茶道)と翻訳し、画像がヒットしない
- -> 画像が出るようになった
+「世界」と入力すると中国語判定だけど、翻訳できた。画像も表示された。
+
+結論
+単語によって日本語以外に誤判定される場合があり、英語訳が得られない場合がある。
  */
